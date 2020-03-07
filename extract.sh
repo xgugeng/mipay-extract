@@ -37,7 +37,7 @@ aria2c_opts="--check-certificate=false --file-allocation=trunc -s10 -x10 -j10 -c
 aria2c="aria2c $aria2c_opts"
 sed="sed"
 vdex="vdexExtractor"
-cdex="$tool_dir/cdex/compact_dex_converter_linux"
+cdex="$tool_dir/cdex/compact_dex_converter_linux64"
 patchmethod="python2.7 $tool_dir/patchmethod.py"
 imgroot=""
 imgexroot="system/"
