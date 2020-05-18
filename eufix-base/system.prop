@@ -1,0 +1,9 @@
+ro.miui.cust_variant=cn
+ro.miui.region=CN
+ro.miui.build.region=cn
+ro.product.locale=zh-CN
+ro.product.locale.language=zh
+ro.product.locale.region=CN
+ro.product.mod_device=
+ro.vendor.miui.region=CN
+ro.miui.mcc=9454
