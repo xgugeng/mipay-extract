@@ -1,6 +1,7 @@
 id=eufix
 name=eumiuifix
-version=20200519
-versionCode=3
+version=20200520
+versionCode=4
 author=kooritea
 description=xiaomieufix
+minMagisk=1700
