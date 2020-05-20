@@ -394,7 +394,7 @@ EOF
             file_list="$file_list system/$f"
         done
         $sevenzip a -tzip ../../eufix-appvault-$model-$ver.zip META-INF $file_list >/dev/null
-        $sevenzip a -tzip ../../eufix-magisk.zip system ../../eufix-base/*
+        $sevenzip a -tzip ../../eufix-magisk-$model-$ver.zip system ../../eufix-base/*
     fi
 
     trap - INT

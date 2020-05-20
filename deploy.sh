@@ -3,16 +3,13 @@
 declare -a urls=(
 
 # Rom URLs
-'http://bigota.d.miui.com/V10.3.1.0.ODECNXM/miui_MIMIX2_V10.3.1.0.ODECNXM_2fecb5a6ab_8.0.zip'
+'https://bigota.d.miui.com/20.5.14/miui_RAPHAEL_20.5.14_7a873b3030_10.0.zip'
 
 )
 
 EU_VER=V10.3.1.0.ODECNXM
 
 declare -a eu_urls=(
-
-# EU Rom URLs
-'https://jaist.dl.sourceforge.net/project/xiaomi-eu-multilang-miui-roms/xiaomi.eu/MIUI-STABLE-RELEASES/MIUIv10/xiaomi.eu_multi_MIMix2_V10.3.1.0.ODECNXM_v10-8.0.zip'
 
 )
 
@@ -28,7 +25,7 @@ if [[ "$1" == "rom" ]]; then
     do
         $aria2c ${i//$EU_VER/$VER}
     done
-    base_url="https://github.com/linusyang92/mipay-extract/releases/download/$VER"
+    base_url="https://github.com/kooritea/mipay-extract/releases/download/$VER"
     $aria2c $base_url/eufix-MiMix2-$VER.zip
     $aria2c $base_url/mipay-MIMIX2-$VER.zip
     $aria2c $base_url/eufix-appvault-MIMIX2-$VER.zip
