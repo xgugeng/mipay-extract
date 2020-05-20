@@ -20,7 +20,7 @@ esac
 done
 
 mipay_apps="Mipay NextPay TSMClient UPTsmService DeskClock"
-private_apps="priv-app/AuthManager priv-app/Calendar priv-app/CalendarProvider data-app/Weather"
+private_apps="priv-app/AuthManager priv-app/Calendar priv-app/CalendarProvider"
 [ -z "$EXTRA" ] || mipay_apps="$mipay_apps $EXTRA"
 [ -z "$EXTRA_PRIV" ] || private_apps="$private_apps $EXTRA_PRIV"
 
