@@ -28,7 +28,7 @@ case $key in
 esac
 done
 
-mipay_apps="Calendar SecurityCenter"
+mipay_apps="Calendar"
 private_apps=""
 [ -z "$EXTRA_PRIV" ] || private_apps="$private_apps $EXTRA_PRIV"
 
@@ -166,9 +166,12 @@ deodex() {
             dexclass="classes.dex"
             $baksmali d $apkfile -o $apkdir/smali || return 1
             if [[ "$app" == "Calendar" ]]; then
-                $patchmethod $apkdir/smali/com/miui/calendar/util/LocalizationUtils.smali \
-                             showsDayDiff showsLunarDate showsWidgetHoliday -showsWorkFreeDay \
-                             -isMainlandChina -isGreaterChina || return 1
+                # $patchmethod $apkdir/smali/com/miui/calendar/util/LocalizationUtils.smali \
+                #              showsDayDiff showsLunarDate showsWidgetHoliday -showsWorkFreeDay \
+                #              -isMainlandChina -isGreaterChina || return 1
+                sed -i '/0x7f0/{N;N;N;N;
+a  const/4 p0, 0x1
+}' $apkdir/smali/com/miui/calendar/util/A.smali
             fi
 
             if [[ "$app" == "Weather" ]]; then
@@ -246,7 +249,7 @@ extract() {
     file=$3
     apps=$4
     priv_apps=$5
-    dir=miuieu-$model-$ver
+    dir=miui-$model-$ver
     img=$dir-system.img
 
     echo "--> rom: $model v$ver"
@@ -313,9 +316,11 @@ extract() {
     echo "--> patching weather"
     rm -f ../weather-*.apk
     $sevenzip x -odeodex/${imgexroot} "$img" ${imgroot}data-app/Weather >/dev/null || clean "$work_dir"
-    cp deodex/system/data-app/Weather/Weather.apk ../weather-$model-$ver-orig.apk
+    # cp deodex/system/data-app/Weather/Weather.apk ../weather-$model-$ver-orig.apk
     deodex "$work_dir" Weather "$arch" data-app || clean "$work_dir"
-    mv deodex/system/data-app/Weather/Weather.apk ../weather-$model-$ver-mod.apk
+    mkdir deodex/system/priv-app/Weather/
+    cp deodex/system/data-app/Weather/Weather.apk deodex/system/priv-app/Weather/Weather.apk
+    # mv deodex/system/data-app/Weather/Weather.apk ../weather-$model-$ver-mod.apk
     rm -rf deodex/system/data-app/
     fi
 
@@ -354,15 +359,15 @@ trap - INT
 hasfile=false
 for f in *.zip; do
     arr=(${f//_/ })
-    if [[ "${arr[0]}" != "xiaomi.eu" ]]; then
+    if [[ "${arr[0]}" != "miui" ]]; then
         continue
     fi
     if [ -f $f.aria2 ]; then
         echo "--> skip incomplete file: $f"
         continue
     fi
-    model=${arr[2]}
-    ver=${arr[3]}
+    model=${arr[1]}
+    ver=${arr[2]}
     extract $model $ver $f "$mipay_apps" "$private_apps"
     hasfile=true
 done
