@@ -1,11 +1,38 @@
 # Mi Pay Extractor
+
 Extract Mi Pay from MIUI China Rom
+
+# 这个分支已经和原分支有了较大改动，原分支的使用方法这里不再适用。
+
+这个分支只提取国内版 ROM 并进行反编译修改，不需要 eu 包，最后打包成 magisk 模块。  
+magisk 模块的本地化内容如下
+
+- 日历的农历
+- 天气改用彩云天气
+- 信息助手
+- 闹钟添加工作日选项
+- 小米钱包
+
+## 使用方法
+
+下载对应的国内版 ROM[https://xiaomifirmwareupdater.com/miui12/](https://xiaomifirmwareupdater.com/miui12/)  
+放入项目文件夹
+
+```bash
+chmod +x ./start
+./start
+```
+
+最后将生成的 eufix-magisk.zip 使用 magisk 刷入即可
+
+---
 
 [![Build Status](https://travis-ci.org/linusyang92/mipay-extract.svg)](https://travis-ci.org/linusyang92/mipay-extract)
 
 **Use at your own risk!**
 
 ## Usage
+
 Put MIUI 9 China Rom (OTA zip package) in the directory and double-click `extract.bat` (Windows) or run `./extract.sh` (macOS and Linux) to generate the flashable zip.
 
 Additionally, if you want to recover Chinese functions, e.g. bus card shortcut or quick payments for WeChat/Alipay in "App Vault" (i.e. the leftmost shortcut page on home screen), you can add an option `--appvault`: `extract.bat --appvault` (Windows) or `./extract.sh --appvault` (macOS and Linux). An extra flashable zip file with prefix `eufix-appvault` will be generated.
@@ -16,7 +43,8 @@ Support Windows, Linux and macOS (10.10 or above). Windows version has all depen
 apt-get install -y openjdk-8-jre python2.7
 ```
 
-**Note**: 
+**Note**:
+
 - It is recommended to run `extract.bat` on Windows. WSL (Windows Subsystem for Linux) is **not supported** due to issues of the emulated file system in WSL. You need a real Linux VM on Windows to run `./extract.sh`.
 - To avoid line-ending issues, Windows users should **directly** [download the repo](https://github.com/linusyang92/mipay-extract/archive/master.zip) through the Github's "Clone or Download" button, instead of using a Windows version's Git command. If you clone the repo using a MinGW version's Git, the line endings may be incorrectly converted to CR/LF, which makes the generated packages invalid to use.
 
@@ -26,11 +54,11 @@ Automatic builds for selected devices are available in [releases](https://github
 
 For users in China, you can also download the **xiaomi.eu rom** and run `cleaner-fix.sh` for creating a flashable zip with prefix `eufix`. It contains patches to
 
-* Show Lunar dates in Calendar app.
-* Fix FC of cleaner app.
-* Show payment monitor options in setting page of Security app.
-* Use Chinese weather sources in Weather app.
-* Allow alarm of legal workday repeat mode.
+- Show Lunar dates in Calendar app.
+- Fix FC of cleaner app.
+- Show payment monitor options in setting page of Security app.
+- Use Chinese weather sources in Weather app.
+- Allow alarm of legal workday repeat mode.
 
 ## (Optional) Encryption for xiaomi.eu ROMs
 
@@ -38,26 +66,28 @@ It is recommended to enable encryption if you plan to use Mi Pay. Official MIUI 
 
 If your device cannot be encrypted normally in Settings, you can completely **format `/data/` partition** and flash the additional zip file `eufix-force-fbe-oreo.zip` after flashing xiaomi.eu ROM.
 
-**Warning**: 
+**Warning**:
 
-* Do not try to flash `eufix-force-fbe-oreo.zip` when your device is **decrypted**. It will cause bootloop. Only flash it when your device has a freshly formatted `/data` partition, or already encrypted.
-* Formatting `/data` will destroy **EVERYTHING**, including all your personal data and external storage (`/sdcard`). Remember to backup before formatting.
-* Once your `/data` partition is encrypted, it will be kept encrypted. But when you flash a new EU rom, the force encryption will be removed. You need to flash this file every time you flash a new EU rom.
+- Do not try to flash `eufix-force-fbe-oreo.zip` when your device is **decrypted**. It will cause bootloop. Only flash it when your device has a freshly formatted `/data` partition, or already encrypted.
+- Formatting `/data` will destroy **EVERYTHING**, including all your personal data and external storage (`/sdcard`). Remember to backup before formatting.
+- Once your `/data` partition is encrypted, it will be kept encrypted. But when you flash a new EU rom, the force encryption will be removed. You need to flash this file every time you flash a new EU rom.
 
 ## Credits
 
-* sdat2img
-* progress (by @verigak)
-* smali/baksmali
-* SuperR's Kitchen
-* vdexExtractor
-* Google Android SDK
-* p7zip
-* [flinux](https://github.com/wishstudio/flinux)
-* [Apk-Changer](https://github.com/Furniel/Apk-Changer/tree/b3680c496169278079d7b23814d3c448f9853f81/other/cdexconv/linux)
+- sdat2img
+- progress (by @verigak)
+- smali/baksmali
+- SuperR's Kitchen
+- vdexExtractor
+- Google Android SDK
+- p7zip
+- [flinux](https://github.com/wishstudio/flinux)
+- [Apk-Changer](https://github.com/Furniel/Apk-Changer/tree/b3680c496169278079d7b23814d3c448f9853f81/other/cdexconv/linux)
 
 ## Disclaimer
+
 This repository is provided with no warranty. Make sure you have legal access to MIUI Roms if using this repository. If any files of this repository violate your copyright, please contact me to remove them.
 
 ## License
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)

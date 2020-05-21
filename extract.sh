@@ -380,7 +380,7 @@ extract() {
     $sed -e '/#mkdir_symlink/ {' -e "r $libmd" -e 'd' -e '}' -i $ubin
     $sed -e '/#do_symlink/ {' -e "r $libln" -e 'd' -e '}' -i $ubin
     rm -f ../../mipay-$model-$ver.zip $libmd $libln system/build.prop
-    $sevenzip a -tzip -x@"$privapp" ../../mipay-$model-$ver.zip . >/dev/null
+    #$sevenzip a -tzip -x@"$privapp" ../../mipay-$model-$ver.zip . >/dev/null
 
     if $has_priv_apps; then
         cp "$tool_dir/update-binary-cleaner" $ubin
@@ -389,11 +389,11 @@ EOF
         $sed -i "s/ver=.*/ver=$model-$ver/" $ubin
         $sed -e '/#extra_patches/ {' -e "r $privapp" -e 'd' -e '}' -i $ubin
         rm -f ../../eufix-appvault-$model-$ver.zip $privapp
-        file_list=""
-        for f in $priv_apps; do
-            file_list="$file_list system/$f"
-        done
-        $sevenzip a -tzip ../../eufix-appvault-$model-$ver.zip META-INF $file_list >/dev/null
+        # file_list=""
+        # for f in $priv_apps; do
+        #     file_list="$file_list system/$f"
+        # done
+        # $sevenzip a -tzip ../../eufix-appvault-$model-$ver.zip META-INF $file_list >/dev/null
     fi
 
     trap - INT
