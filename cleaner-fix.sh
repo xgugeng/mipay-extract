@@ -29,7 +29,7 @@ esac
 done
 
 mipay_apps="Calendar"
-private_apps=""
+private_apps="priv-app/Mms"
 [ -z "$EXTRA_PRIV" ] || private_apps="$private_apps $EXTRA_PRIV"
 
 base_dir=$PWD
@@ -137,7 +137,45 @@ update_international_build_flag() {
         if grep -q -F "$pattern" $i; then
             echo "----> ! failed to patch: $(basename $i)"
         else
-            echo "----> patched smali: $(basename $i)"
+            echo "----> patched international_build_flag smali: $(basename $i)"
+        fi
+    done
+}
+
+update_global_build_flag() {
+    path=$1
+    pattern="Lmiui/os/Build;->IS_GLOBAL_BUILD"
+    
+    if [ -d $path ]; then
+        found=()
+        if [[ "$OSTYPE" == "cygwin"* ]]; then
+            pushd "$path"
+            cmdret="$(/cygdrive/c/Windows/System32/findstr.exe /sm /c:${pattern} '*.*' | tr -d '\015')"
+            popd
+            result="${cmdret//\\//}"
+            while read i; do
+                found+=("${path}/$i")
+            done <<< "$result"
+        else
+            files="$(find $path -type f -iname "*.smali")"
+            while read i; do
+                if grep -q -F "$pattern" $i; then
+                    found+=("$i")
+                fi
+            done <<< "$files"
+        fi
+    fi
+    if [ -f $path ]; then
+        found=($path)
+    fi
+
+    for i in "${found[@]}"; do
+        $sed -i 's|sget-boolean \([a-z]\)\([0-9]\+\), Lmiui/os/Build;->IS_GLOBAL_BUILD:Z|const/4 \1\2, 0x0|g' "$i" \
+            || return 1
+        if grep -q -F "$pattern" $i; then
+            echo "----> ! failed to patch: $(basename $i)"
+        else
+            echo "----> patched global_build_flag smali: $(basename $i)"
         fi
     done
 }
@@ -175,7 +213,7 @@ a  const/4 p0, 0x1
             fi
 
             if [[ "$app" == "Weather" ]]; then
-                echo "----> searching smali..."
+                echo "----> searching Weather smali..."
                 update_international_build_flag "$apkdir/smali/com/miui/weather2"
                 i="$apkdir/smali/com/miui/weather2/tools/ToolUtils.smali"
                 if [ -f "$i" ]; then
@@ -183,12 +221,28 @@ a  const/4 p0, 0x1
                 fi
             fi
 
+            if [[ "$app" == "Mms" ]]; then
+                echo "----> searching Mms smali..."
+                update_international_build_flag "$apkdir/smali/com/android/mms"
+                # update_global_build_flag "$apkdir/smali/com/android/mms"
+                update_international_build_flag "$apkdir/smali/com/miui/smsextra"
+                # update_global_build_flag "$apkdir/smali/com/miui/smsextra"
+                $patchmethod $apkdir/smali/com/android/mms/util/UriUtils.smali -isGlobalSms
+                $patchmethod $apkdir/smali/com/xiaomi/channel/commonutils/android/MIUIUtils.smali -isGlobalRegion
+                $patchmethod $apkdir/smali/com/xiaomi/channel/commonutils/android/SystemUtils.smali -isGlobalVersion
+                $patchmethod $apkdir/smali/com/android/mms/storage/StorageManager.smali isVerificationCodeCategoryEnabled
+                $patchmethod $apkdir/smali/com/android/mms/util/VerificationCodeUtils.smali isVerificationCodeCategoryEnabled
+                $patchmethod $apkdir/smali/com/miui/smsextra/util/UpdateVerificationCodeUtils.smali isVerificationCodeCategoryEnabled
+                
+
+            fi
+
             if [[ "$app" == "SecurityCenter" ]]; then
                 update_international_build_flag "$apkdir/smali/com/miui/antivirus/activity/SettingsActivity.smali"
             fi
 
             if [[ "$app" == "DeskClock" ]]; then
-                echo "----> searching smali..."
+                echo "----> searching DeskClock smali..."
                 update_international_build_flag "$apkdir/smali/com/android/deskclock/settings/SettingsActivity.smali"
                 update_international_build_flag "$apkdir/smali/com/android/deskclock/util/Util.smali"
             fi
