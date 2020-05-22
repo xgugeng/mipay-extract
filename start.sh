@@ -23,7 +23,7 @@ for f in *.zip; do
     ./extract.sh --appvault
     cp -R ./miui-$model-$ver/deodex/system ./eufix-base/
     cd eufix-base/
-    zip -r ../eufix-magisk.zip ./*
+    zip -r ../eufix-magisk-$model-$ver.zip ./*
     cd ..
     rm -rf ./eufix-base/system
 done
