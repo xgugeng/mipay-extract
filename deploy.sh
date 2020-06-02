@@ -31,13 +31,14 @@ if [[ "$1" == "rom" ]]; then
     $aria2c $base_url/eufix-appvault-MIMIX2-$VER.zip
     exit 0
 fi
-for i in "${urls[@]}"
-do
-   bash extract.sh --appvault "$i" || exit 1
-done
-[[ "$1" == "keep"  ]] || rm -rf miui-*/ miui_*.zip
-for i in "${eu_urls[@]}"
-do
-   bash cleaner-fix.sh --nofbe "$i" || exit 1
-done
+# for i in "${urls[@]}"
+# do
+#    bash extract.sh --appvault "$i" || exit 1
+# done
+# [[ "$1" == "keep"  ]] || rm -rf miui-*/ miui_*.zip
+# for i in "${eu_urls[@]}"
+# do
+#    bash cleaner-fix.sh --nofbe "$i" || exit 1
+# done
+bash start.sh
 exit 0
