@@ -9,7 +9,7 @@ magisk 模块的本地化内容如下
 
 - 日历的农历
 - 天气改用彩云天气
-- 信息助手（不是所有卡片都能恢复，快递查询可以恢复）
+- 信息助手微信扫一扫、支付宝、小米钱包公交车等顶部磁铁（不是所有卡片都能恢复，快递查询可以恢复，部分卡片需要有相应的应用）
 - 闹钟添加工作日选项
 - 小米钱包
 - 短信智能分类和验证码快速复制（设置里的选项无法关闭这个功能，都搞本地化了不会有人要关这个吧）
@@ -27,15 +27,31 @@ magisk 模块的本地化内容如下
 
 ## 使用方法
 
-下载对应的国内版 ROM[https://xiaomifirmwareupdater.com/miui12/](https://xiaomifirmwareupdater.com/miui12/)  
-放入项目文件夹
+1、克隆项目(或者http下载)  
 
+```bash
+git clone git@github.com:kooritea/mipay-extract.git
+```
+
+2、下载对应的国内版 ROM[https://xiaomifirmwareupdater.com/miui12/](https://xiaomifirmwareupdater.com/miui12/)  
+如果是miui11的话直接把连接的路径改成miui11  
+
+把下载的国内版ROM放入项目文件夹(注意不要重命名了)
+
+3、依赖(一般linux发行版都有这两个了，版本不对问题也不大，执行不了再说)
+```
+apt-get install -y openjdk-8-jre python2.7
+```
+
+4、执行
 ```bash
 chmod +x ./start
 ./start
 ```
 
-最后将生成的 eufix-magisk.zip 使用 magisk 刷入即可
+不支持windows抱歉，我没有改bat和没有windows测试环境
+
+最后将生成的 eufix-magisk-model-ver.zip 使用 magisk 刷入即可
 
 ---
 
