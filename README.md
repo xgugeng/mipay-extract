@@ -13,11 +13,17 @@ magisk 模块的本地化内容如下
 - 闹钟添加工作日选项
 - 小米钱包
 - 短信智能分类和验证码快速复制（设置里的选项无法关闭这个功能，都搞本地化了不会有人要关这个吧）
-- mipush 刷入模块后删除/data/data/com.xiaomi.xmsf文件夹重启即可恢复
+- mipush (刷入本模块后删除/data/data/com.xiaomi.xmsf文件夹重启即可恢复)
 
 ## 请注意
 刷入本模块后将不能通过safetyNet测试，卸载模块也不能恢复，原因不明  
 有使用google pay或看netflix需求的请慎重刷入
+
+## 关于safetyNet测试
+刷入后无法通过应该是修改了build.prop引起的  
+需要修改build.prop是因为恢复mipush的需要  
+假如不需要mipush而需要通过safetyNet测试的话  
+可以清空`/eufix-base/system.prop`文件内容(不要删除文件)再运行一次即可
 
 ## 使用方法
 
