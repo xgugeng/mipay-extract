@@ -18,6 +18,20 @@ for f in *.zip; do
     fi
     model=${arr[1]}
     ver=${arr[2]}
+    ####update module.prop
+    verCode=`cat ./eufix-base/module.prop | grep versionCode= | cut -d '=' -f 2`
+    verCode=$(($verCode+1))
+    version=$(date "+%Y%m%d")
+    cat > ./eufix-base/module.prop <<-EOF
+id=eufix
+name=eumiuifix
+version=$version-$model-$ver-$verCode
+versionCode=$verCode
+author=kooritea
+description=xiaomieufix-$model-$ver
+EOF
+
+####
     ./cleaner-fix.sh --clock
     cp -R ./miui-$model-$ver/deodex/system ./eufix-base/
     ./extract.sh --appvault
