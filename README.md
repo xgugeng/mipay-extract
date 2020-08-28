@@ -25,7 +25,7 @@ magisk 模块的本地化内容如下
 假如不需要mipush而需要通过safetyNet测试的话  
 可以清空`/eufix-base/system.prop`文件内容(不要删除文件)再运行一次即可
 
-## 使用方法
+## 使用方法(任选其一)
 
 一、使用我提取的K20 pro plus 模块，一般来应用是不分机型的，这个模块按理也是可以用在其他机型上  
 直接下载然后使用magisk刷入 https://github.com/kooritea/mipay-extract/releases
