@@ -210,6 +210,11 @@ deodex() {
                 sed -i '/0x7f0/{N;N;N;N;
 a  const/4 p0, 0x1
 }' $apkdir/smali/com/miui/calendar/util/A.smali
+
+#20.8.20
+                sed -i '/0x7f0/{N;N;N;N;
+a  const/4 p0, 0x1
+}' $apkdir/smali/com/miui/calendar/util/B.smali
             fi
 
             if [[ "$app" == "Weather" ]]; then
