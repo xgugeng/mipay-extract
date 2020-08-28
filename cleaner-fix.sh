@@ -29,8 +29,11 @@ esac
 done
 
 mipay_apps="Calendar"
-private_apps="priv-app/Mms"
+private_apps="priv-app/Mms priv-app/Contacts priv-app/ContactsProvider priv-app/YellowPage"
 [ -z "$EXTRA_PRIV" ] || private_apps="$private_apps $EXTRA_PRIV"
+
+# mipay_apps=""
+# private_apps="priv-app/Contacts priv-app/ContactsProvider priv-app/YellowPage"
 
 base_dir=$PWD
 tool_dir=$base_dir/tools
@@ -240,6 +243,18 @@ a  const/4 p0, 0x1
                 $patchmethod $apkdir/smali/com/miui/smsextra/util/UpdateVerificationCodeUtils.smali isVerificationCodeCategoryEnabled
                 
 
+            fi
+
+            if [[ "$app" == "Contacts" ]]; then
+                echo "----> searching Contacts smali..."
+                # 通讯录显示黄页和掌上移动
+                update_international_build_flag "$apkdir/smali/com/miui"
+                $patchmethod $apkdir/smali/com/miui/chinamobile/ChinaMobileUtil.smali isChinaMobilePalmUsable
+            fi
+
+            if [[ "$app" == "ContactsProvider" ]]; then
+                echo "----> searching ContactsProvider smali..."
+                update_international_build_flag "$apkdir/smali"
             fi
 
             if [[ "$app" == "SecurityCenter" ]]; then
