@@ -14,6 +14,7 @@ magisk 模块的本地化内容如下
 - 小米钱包
 - 短信智能分类和验证码快速复制（设置里的选项无法关闭这个功能，都搞本地化了不会有人要关这个吧）
 - mipush (刷入本模块后删除/data/data/com.xiaomi.xmsf文件夹重启即可恢复)
+- 通知聚合(如果设置中没有通知聚合选项，见下面解决方法)
 
 ## 请注意
 刷入本模块后将不能通过safetyNet测试，卸载模块也不能恢复，原因不明  
@@ -63,6 +64,26 @@ chmod +x ./start
 [![Build Status](https://travis-ci.org/linusyang92/mipay-extract.svg)](https://travis-ci.org/linusyang92/mipay-extract)
 
 **Use at your own risk!**
+
+## 通知聚合未恢复问题
+
+如果在设置中未出现通知聚合选项，在终端中输入下面的命令，adb shell 或者终端应用都可以
+
+```bash
+su
+
+setprop persist.sys.notification_rank 6
+
+#miui12 通知聚合
+setprop persist.sys.notification_ver 2
+
+#miui11 通知过滤(miui12开发版已经强制使用通知聚合，如果想在miui12开发版使用通知过滤请使用edxposed hook)
+setprop persist.sys.notification_ver 1
+
+killall com.miui.notification
+```
+
+
 
 ## Usage
 

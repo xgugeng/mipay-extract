@@ -29,11 +29,11 @@ esac
 done
 
 mipay_apps="Calendar"
-private_apps="priv-app/Mms priv-app/Contacts priv-app/ContactsProvider priv-app/YellowPage"
+private_apps="priv-app/Mms priv-app/Contacts priv-app/ContactsProvider priv-app/YellowPage app/NotificationCenter"
 [ -z "$EXTRA_PRIV" ] || private_apps="$private_apps $EXTRA_PRIV"
 
 # mipay_apps=""
-# private_apps="priv-app/Contacts priv-app/ContactsProvider priv-app/YellowPage"
+# private_apps=""
 
 base_dir=$PWD
 tool_dir=$base_dir/tools
@@ -254,6 +254,11 @@ a  const/4 p0, 0x1
 
             if [[ "$app" == "ContactsProvider" ]]; then
                 echo "----> searching ContactsProvider smali..."
+                update_international_build_flag "$apkdir/smali"
+            fi
+
+            if [[ "$app" == "NotificationCenter" ]]; then
+                echo "----> searching NotificationCenter smali..."
                 update_international_build_flag "$apkdir/smali"
             fi
 
