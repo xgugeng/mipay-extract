@@ -61,10 +61,6 @@ chmod +x ./start
 
 ---
 
-[![Build Status](https://travis-ci.org/linusyang92/mipay-extract.svg)](https://travis-ci.org/linusyang92/mipay-extract)
-
-**Use at your own risk!**
-
 ## 通知聚合未恢复问题
 
 如果在设置中未出现通知聚合选项，在终端中输入下面的命令，adb shell 或者终端应用都可以
@@ -72,17 +68,20 @@ chmod +x ./start
 ```bash
 su
 
-setprop persist.sys.notification_rank 6
-
-#miui12 通知聚合
 setprop persist.sys.notification_ver 2
 
-#miui11 通知过滤(miui12开发版已经强制使用通知聚合，如果想在miui12开发版使用通知过滤请使用edxposed hook)
-setprop persist.sys.notification_ver 1
+#通知聚合
+setprop persist.sys.notification_rank 6
+
+#通知过滤
+setprop persist.sys.notification_rank 3
 
 killall com.miui.notification
 ```
 
+[![Build Status](https://travis-ci.org/linusyang92/mipay-extract.svg)](https://travis-ci.org/linusyang92/mipay-extract)
+
+**Use at your own risk!**
 
 
 ## Usage
