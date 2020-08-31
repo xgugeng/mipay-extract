@@ -15,6 +15,7 @@ magisk 模块的本地化内容如下
 - 短信智能分类和验证码快速复制（设置里的选项无法关闭这个功能，都搞本地化了不会有人要关这个吧）
 - mipush (刷入本模块后删除/data/data/com.xiaomi.xmsf文件夹重启即可恢复)
 - 通知聚合(如果设置中没有通知聚合选项，见下面解决方法)
+- 通话记录号码识别(拨号界面未恢复)
 
 ## 请注意
 刷入本模块后将不能通过safetyNet测试，卸载模块也不能恢复，原因不明  
@@ -73,7 +74,7 @@ setprop persist.sys.notification_ver 2
 #通知聚合
 setprop persist.sys.notification_rank 6
 
-#通知过滤
+#通知过滤(miui9的 在12上效果不好)
 setprop persist.sys.notification_rank 3
 
 killall com.miui.notification
