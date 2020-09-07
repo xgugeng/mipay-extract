@@ -29,11 +29,11 @@ esac
 done
 
 mipay_apps="Calendar"
-private_apps="priv-app/Mms app/NotificationCenter priv-app/Contacts priv-app/ContactsProvider priv-app/YellowPage"
+private_apps="priv-app/Mms app/NotificationCenter priv-app/Contacts priv-app/ContactsProvider priv-app/YellowPage priv-app/AuthManager"
 [ -z "$EXTRA_PRIV" ] || private_apps="$private_apps $EXTRA_PRIV"
 
 # mipay_apps=""
-# private_apps="priv-app/InCallUI"
+# private_apps=""
 
 base_dir=$PWD
 tool_dir=$base_dir/tools
@@ -268,6 +268,10 @@ a  const/4 p0, 0x1
 
             if [[ "$app" == "SecurityCenter" ]]; then
                 update_international_build_flag "$apkdir/smali/com/miui/antivirus/activity/SettingsActivity.smali"
+            fi
+
+            if [[ "$app" == "AuthManager" ]]; then
+                update_international_build_flag "$apkdir/smali"
             fi
 
             if [[ "$app" == "DeskClock" ]]; then
