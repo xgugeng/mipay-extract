@@ -15,7 +15,7 @@ magisk 模块的本地化内容如下
 - 短信智能分类和验证码快速复制（设置里的选项无法关闭这个功能，都搞本地化了不会有人要关这个吧）
 - mipush (刷入本模块后删除/data/data/com.xiaomi.xmsf文件夹重启即可恢复)
 - 通知聚合(如果设置中没有通知聚合选项，见下面解决方法)
-- 通话记录号码识别(拨号界面未恢复)
+- 号码识别(黄页)
 - 使用国内版的权限管理(eu版缺少读取应用列表等权限控制)
 - 恢复设置->电池与性能中的场景配置(eu版这个功能默认打开不能关闭，会导致睡觉时为了省电断开wifi)
 
@@ -31,7 +31,7 @@ magisk 模块的本地化内容如下
 我的设备中by xiaomi.eu的字样会消失  
 
 ## 权限管理器使用国内版
-可能你不一定能感受出来，国内版的权限管理更加广更加严格  
+可能你不一定能感受出来，国内版的权限管理范围更加广控制更加严格  
 一个比较明显的，在eu版中，没有自启动权限的termux在任务管理器被划掉之后能够在后台保持session不掉  
 但是国内版有没有自启动权限都不能保持session(原因是国内版在任务管理器划掉时会不管3721都全杀掉，有自启权限的话你就可以杀掉后自启，不做特殊处理的国外软件session当然就掉了)  
 在eu版上，系统级广播唤醒应用是不需要自启动权限的，在国内版中，需要给自启动权限里面的允许系统唤醒权限  
@@ -43,6 +43,24 @@ magisk 模块的本地化内容如下
 需要修改build.prop是因为恢复mipush的需要  
 假如不需要mipush而需要通过safetyNet测试的话  
 可以清空`/eufix-base/system.prop`文件内容(不要删除文件)再运行一次即可
+
+## 通知聚合未恢复问题
+
+如果在设置中未出现通知聚合选项，在终端中输入下面的命令，adb shell 或者终端应用都可以
+
+```bash
+su
+
+setprop persist.sys.notification_ver 2
+
+#通知聚合
+setprop persist.sys.notification_rank 6
+
+#通知过滤(miui9的 在12上效果不好)
+setprop persist.sys.notification_rank 3
+
+killall com.miui.notification
+```
 
 ## 使用方法(任选其一)
 
@@ -79,23 +97,7 @@ chmod +x ./start
 
 ---
 
-## 通知聚合未恢复问题
 
-如果在设置中未出现通知聚合选项，在终端中输入下面的命令，adb shell 或者终端应用都可以
-
-```bash
-su
-
-setprop persist.sys.notification_ver 2
-
-#通知聚合
-setprop persist.sys.notification_rank 6
-
-#通知过滤(miui9的 在12上效果不好)
-setprop persist.sys.notification_rank 3
-
-killall com.miui.notification
-```
 
 [![Build Status](https://travis-ci.org/linusyang92/mipay-extract.svg)](https://travis-ci.org/linusyang92/mipay-extract)
 
