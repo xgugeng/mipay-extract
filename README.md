@@ -19,52 +19,6 @@ magisk 模块的本地化内容如下
 - 使用国内版的权限管理(eu版缺少读取应用列表等权限控制)
 - 恢复设置->电池与性能中的场景配置(eu版这个功能默认打开不能关闭，会导致睡觉时为了省电断开wifi)
 
-## 20.9.24会有一个报错
-因为国内版已经使用新版信息助手，eu版未跟进，建议暂时使用旧的如20.9.3制作本地化模块，或者编辑start.sh文件删除37行的--appvault
-
-## 请注意
-刷入本模块后将不能通过safetyNet测试，卸载模块也不能恢复，原因不明  
-有使用google pay或看netflix需求的请慎重刷入
-
-## 设置的ui会发生改变
-由于将eu版权限控制器改为国内版权限控制器，需要更改ro.product.mod_device  
-会导致设置页面变为国内版，不过eu版的设置项除了桌面(eu版额外的设置项会保留)之外都是被精简过的，所以几乎没有问题  
-设置里的谷歌入口消失: 下载`创建快捷方式`这个应用，打开右上角勾选`也搜索活动列表`和`也显示系统应用`，搜索`com.google.android.gms.app.settings.GoogleSettingsLink`,创建这个快捷方式即可  
-首页的设备安全情况: 密码安全->系统安全
-我的设备中by xiaomi.eu的字样会消失  
-
-## 权限管理器使用国内版
-可能你不一定能感受出来，国内版的权限管理范围更加广控制更加严格  
-一个比较明显的，在eu版中，没有自启动权限的termux在任务管理器被划掉之后能够在后台保持session不掉  
-但是国内版有没有自启动权限都不能保持session(原因是国内版在任务管理器划掉时会不管3721都全杀掉，有自启权限的话你就可以杀掉后自启，不做特殊处理的国外软件session当然就掉了)  
-在eu版上，系统级广播唤醒应用是不需要自启动权限的，在国内版中，需要给自启动权限里面的允许系统唤醒权限  
-
-如果你更喜欢eu版的权限管理，可以删除eufix-base/system.prop里面的`ro.product.mod_device=`，删除cleaner-fix.sh中的32行左右的private_apps里面的priv-app/AuthManager，这样打包出来的模块就不会更改权限管理器了  
-
-## 关于safetyNet测试
-刷入后无法通过应该是修改了build.prop引起的  
-需要修改build.prop是因为恢复mipush的需要  
-假如不需要mipush而需要通过safetyNet测试的话  
-可以清空`/eufix-base/system.prop`文件内容(不要删除文件)再运行一次即可
-
-## 通知聚合未恢复问题
-
-如果在设置中未出现通知聚合选项，在终端中输入下面的命令，adb shell 或者终端应用都可以
-
-```bash
-su
-
-setprop persist.sys.notification_ver 2
-
-#通知聚合
-setprop persist.sys.notification_rank 6
-
-#通知过滤(miui9的 在12上效果不好)
-setprop persist.sys.notification_rank 3
-
-killall com.miui.notification
-```
-
 ## 使用方法(任选其一)
 
 一、使用我提取的K20 pro plus 模块，一般来应用是不分机型的，这个模块按理也是可以用在其他机型上  
@@ -100,7 +54,53 @@ chmod +x ./start
 
 ---
 
+## 20.9.24会有一个报错
+因为国内版已经使用新版信息助手，eu版未跟进，建议暂时使用旧的如20.9.3制作本地化模块，或者编辑start.sh文件删除37行的--appvault
 
+## 请注意
+~~刷入本模块后将不能通过safetyNet测试，卸载模块也不能恢复，原因不明(?)~~
+好像不是本模块而是edx导致的  
+有使用google pay或看netflix需求的请慎重刷入  
+
+## 设置的ui会发生改变
+由于将eu版权限控制器改为国内版权限控制器，需要更改ro.product.mod_device  
+会导致设置页面变为国内版，不过eu版的设置项除了桌面(eu版额外的设置项会保留)之外都是被精简过的，所以几乎没有问题  
+设置里的谷歌入口消失: 下载`创建快捷方式`这个应用，打开右上角勾选`也搜索活动列表`和`也显示系统应用`，搜索`com.google.android.gms.app.settings.GoogleSettingsLink`,创建这个快捷方式即可  
+首页的设备安全情况: 密码安全->系统安全  
+我的设备中by xiaomi.eu的字样会消失  
+
+## 权限管理器使用国内版
+可能你不一定能感受出来，国内版的权限管理范围更加广控制更加严格  
+一个比较明显的，在eu版中，没有自启动权限的termux在任务管理器被划掉之后能够在后台保持session不掉  
+但是国内版有没有自启动权限都不能保持session(原因是国内版在任务管理器划掉时会不管3721都全杀掉，有自启权限的话你就可以杀掉后自启，不做特殊处理的国外软件session当然就掉了)  
+在eu版上，系统级广播唤醒应用是不需要自启动权限的，在国内版中，需要给自启动权限里面的允许系统唤醒权限  
+
+~~如果你更喜欢eu版的权限管理，可以删除eufix-base/system.prop里面的`ro.product.mod_device=`，删除cleaner-fix.sh中的32行左右的private_apps里面的priv-app/AuthManager，这样打包出来的模块就不会更改权限管理器了~~  
+不建议，大部分本地化都是使用ro.product.mod_device=实现的
+
+## 通知聚合未恢复问题
+
+如果在设置中未出现通知聚合选项，在终端中输入下面的命令，adb shell 或者终端应用都可以
+
+```bash
+su
+
+setprop persist.sys.notification_ver 2
+
+#通知聚合
+setprop persist.sys.notification_rank 6
+
+#通知过滤(miui9的 在12上效果不好)
+setprop persist.sys.notification_rank 3
+
+killall com.miui.notification
+```
+
+## 刷入后出现部分系统应用名称显示不正常或打开闪退
+删除/data/system/package_cache/下的文件夹(注意不是删除package_cache文件夹)，然后重启
+
+---
+ 
 
 [![Build Status](https://travis-ci.org/linusyang92/mipay-extract.svg)](https://travis-ci.org/linusyang92/mipay-extract)
 

@@ -220,64 +220,66 @@ a  const/4 p0, 0x1
 }' $apkdir/smali/com/miui/calendar/util/B.smali
             fi
 
-            if [[ "$app" == "Weather" ]]; then
-                echo "----> searching Weather smali..."
-                update_international_build_flag "$apkdir/smali/com/miui/weather2"
-                i="$apkdir/smali/com/miui/weather2/tools/ToolUtils.smali"
-                if [ -f "$i" ]; then
-                    $patchmethod "$i" -canRequestCommercial -canRequestCommercialInfo || return 1
-                fi
-            fi
+            # if [[ "$app" == "Weather" ]]; then
+                # echo "----> searching Weather smali..."
+                # update_international_build_flag "$apkdir/smali/com/miui/weather2"
+                # i="$apkdir/smali/com/miui/weather2/tools/ToolUtils.smali"
+                # if [ -f "$i" ]; then
+                #     $patchmethod "$i" -canRequestCommercial -canRequestCommercialInfo || return 1
+                # fi
+            # fi
 
             if [[ "$app" == "Mms" ]]; then
                 echo "----> searching Mms smali..."
-                update_international_build_flag "$apkdir/smali/com/android/mms"
-                # update_global_build_flag "$apkdir/smali/com/android/mms"
-                update_international_build_flag "$apkdir/smali/com/miui/smsextra"
-                # update_global_build_flag "$apkdir/smali/com/miui/smsextra"
-                $patchmethod $apkdir/smali/com/android/mms/util/UriUtils.smali -isGlobalSms
-                $patchmethod $apkdir/smali/com/xiaomi/channel/commonutils/android/MIUIUtils.smali -isGlobalRegion
-                $patchmethod $apkdir/smali/com/xiaomi/channel/commonutils/android/SystemUtils.smali -isGlobalVersion
-                $patchmethod $apkdir/smali/com/android/mms/storage/StorageManager.smali isVerificationCodeCategoryEnabled
-                $patchmethod $apkdir/smali/com/android/mms/util/VerificationCodeUtils.smali isVerificationCodeCategoryEnabled
-                $patchmethod $apkdir/smali/com/miui/smsextra/util/UpdateVerificationCodeUtils.smali isVerificationCodeCategoryEnabled
+                # update_international_build_flag "$apkdir/smali/com/android/mms"
+                # # update_global_build_flag "$apkdir/smali/com/android/mms"
+                # update_international_build_flag "$apkdir/smali/com/miui/smsextra"
+                # # update_global_build_flag "$apkdir/smali/com/miui/smsextra"
+                # $patchmethod $apkdir/smali/com/android/mms/util/UriUtils.smali -isGlobalSms
+                # $patchmethod $apkdir/smali/com/xiaomi/channel/commonutils/android/MIUIUtils.smali -isGlobalRegion
+                # $patchmethod $apkdir/smali/com/xiaomi/channel/commonutils/android/SystemUtils.smali -isGlobalVersion
+                # $patchmethod $apkdir/smali/com/android/mms/storage/StorageManager.smali isVerificationCodeCategoryEnabled
+                # $patchmethod $apkdir/smali/com/android/mms/util/VerificationCodeUtils.smali isVerificationCodeCategoryEnabled
+                # $patchmethod $apkdir/smali/com/miui/smsextra/util/UpdateVerificationCodeUtils.smali isVerificationCodeCategoryEnabled
                 
 
             fi
 
             if [[ "$app" == "Contacts" ]]; then
                 echo "----> searching Contacts smali..."
-                # 通讯录显示黄页
-                update_international_build_flag "$apkdir/smali/com/miui"
+                # # 通讯录显示黄页
+                # update_international_build_flag "$apkdir/smali/com/miui"
             fi
 
             if [[ "$app" == "ContactsProvider" ]]; then
                 echo "----> searching ContactsProvider smali..."
-                update_international_build_flag "$apkdir/smali"
+                # update_international_build_flag "$apkdir/smali"
             fi
 
             if [[ "$app" == "YellowPage" ]]; then
                 echo "----> searching ContactsProvider smali..."
-                update_international_build_flag "$apkdir/smali"
+                # update_international_build_flag "$apkdir/smali"
             fi
 
             if [[ "$app" == "NotificationCenter" ]]; then
                 echo "----> searching NotificationCenter smali..."
-                update_international_build_flag "$apkdir/smali"
+                # update_international_build_flag "$apkdir/smali"
             fi
 
             if [[ "$app" == "SecurityCenter" ]]; then
-                update_international_build_flag "$apkdir/smali/com/miui/antivirus/activity/SettingsActivity.smali"
+                echo "----> searching SecurityCenter smali..."
+                # update_international_build_flag "$apkdir/smali/com/miui/antivirus/activity/SettingsActivity.smali"
             fi
 
             if [[ "$app" == "AuthManager" ]]; then
-                update_international_build_flag "$apkdir/smali"
+                echo "----> searching AuthManager smali..."
+                # update_international_build_flag "$apkdir/smali"
             fi
 
             if [[ "$app" == "DeskClock" ]]; then
                 echo "----> searching DeskClock smali..."
-                update_international_build_flag "$apkdir/smali/com/android/deskclock/settings/SettingsActivity.smali"
-                update_international_build_flag "$apkdir/smali/com/android/deskclock/util/Util.smali"
+                # update_international_build_flag "$apkdir/smali/com/android/deskclock/settings/SettingsActivity.smali"
+                # update_international_build_flag "$apkdir/smali/com/android/deskclock/util/Util.smali"
             fi
 
             if [[ "$app" == "services.jar" ]]; then
