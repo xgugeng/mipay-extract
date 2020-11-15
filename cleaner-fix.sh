@@ -29,7 +29,7 @@ esac
 done
 
 mipay_apps="Calendar"
-private_apps="priv-app/Mms app/NotificationCenter priv-app/Contacts priv-app/ContactsProvider priv-app/YellowPage priv-app/AuthManager"
+private_apps="priv-app/Mms app/NotificationCenter priv-app/YellowPage priv-app/AuthManager"
 [ -z "$EXTRA_PRIV" ] || private_apps="$private_apps $EXTRA_PRIV"
 
 # mipay_apps=""

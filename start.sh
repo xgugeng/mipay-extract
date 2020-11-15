@@ -34,10 +34,11 @@ EOF
 ####
     ./cleaner-fix.sh --clock
     cp -R ./miui-$model-$ver/deodex/system ./eufix-base/
-    ./extract.sh --appvault
+    ./extract.sh
     cp -R ./miui-$model-$ver/deodex/system ./eufix-base/
+    cp -R ./PersonalAssistant ./eufix-base/system/priv-app/
     cd eufix-base/
-    zip -r ../eufix-magisk-$model-$ver.zip ./*
+    zip -r ../eufix-$ver-$model-magisk.zip ./*
     cd ..
     rm -rf ./eufix-base/system
 done
