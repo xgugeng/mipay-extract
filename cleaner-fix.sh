@@ -210,14 +210,19 @@ deodex() {
                 # $patchmethod $apkdir/smali/com/miui/calendar/util/LocalizationUtils.smali \
                 #              showsDayDiff showsLunarDate showsWidgetHoliday -showsWorkFreeDay \
                 #              -isMainlandChina -isGreaterChina || return 1
-                sed -i '/0x7f0/{N;N;N;N;
+                sed -i '/0x7f04/{N;N;N;N;
 a  const/4 p0, 0x1
 }' $apkdir/smali/com/miui/calendar/util/A.smali
 
 #20.8.20
-                sed -i '/0x7f0/{N;N;N;N;
+                sed -i '/0x7f04/{N;N;N;N;
 a  const/4 p0, 0x1
 }' $apkdir/smali/com/miui/calendar/util/B.smali
+
+sed -i '/0x7f05/{N;N;N;N;
+a  const/4 p0, 0x1
+}' $apkdir/smali/com/miui/calendar/util/D.smali
+
             fi
 
             # if [[ "$app" == "Weather" ]]; then
