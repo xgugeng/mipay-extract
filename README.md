@@ -9,7 +9,7 @@ magisk 模块的本地化内容如下
 
 - 日历的农历
 - 天气改用彩云天气
-- 信息助手微信扫一扫、支付宝、小米钱包公交车等顶部磁铁（不是所有卡片都能恢复，快递查询可以恢复，部分卡片需要有相应的应用）（20.9.24已失效）
+- 信息助手微信扫一扫、支付宝、小米钱包公交车等顶部磁铁（不是所有卡片都能恢复，快递查询可以恢复，部分卡片需要有相应的应用）
 - 闹钟添加工作日选项
 - 小米钱包
 - 短信智能分类和验证码快速复制（设置里的选项无法关闭这个功能，都搞本地化了不会有人要关这个吧）
@@ -94,6 +94,10 @@ killall com.miui.notification
 删除/data/system/package_cache/下的文件夹(注意不是删除package_cache文件夹)，然后重启
 
 ---
+
+## 已知bug
+
+- 联系人的详细页面没法打开
  
 
 [![Build Status](https://travis-ci.org/linusyang92/mipay-extract.svg)](https://travis-ci.org/linusyang92/mipay-extract)
