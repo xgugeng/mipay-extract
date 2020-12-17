@@ -4,6 +4,8 @@ Extract Mi Pay from MIUI China Rom
 
 # 这个分支已经和原分支有了较大改动，原分支的使用方法这里不再适用。
 
+仅测试过安卓10miui12，安卓11或者miui12可能有问题
+
 这个分支只提取国内版 ROM 并进行反编译修改，不需要 eu 包，最后打包成 magisk 模块。  
 magisk 模块的本地化内容如下
 
@@ -21,7 +23,7 @@ magisk 模块的本地化内容如下
 
 ## 使用方法(任选其一)
 
-一、使用我提取的K20 pro plus 模块，一般来应用是不分机型的，这个模块按理也是可以用在其他机型上  
+一、（不推荐）使用我提取的K20 pro plus 模块，一般来应用是不分机型的，这个模块按理也是可以用在其他机型上  
 直接下载然后使用magisk刷入 https://github.com/kooritea/mipay-extract/releases
 
 二、使用自己的机型的rom包提取
@@ -51,6 +53,8 @@ chmod +x ./start
 不支持windows抱歉，我没有改bat和没有windows测试环境
 
 最后将生成的 eufix-magisk-model-ver.zip 使用 magisk 刷入即可
+
+建议刷入模块后先去删除/data/system/package_cache/下的文件夹再重启
 
 ---
 
