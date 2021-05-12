@@ -2,6 +2,12 @@
 
 Extract Mi Pay from MIUI China Rom
 
+
+## miui 12.5或以上建议用以下这个，听说准备开源
+[https://blog.minamigo.moe/archives/184](https://blog.minamigo.moe/archives/184)
+
+---
+
 # 这个分支已经和原分支有了较大改动，原分支的使用方法这里不再适用。
 
 仅测试过安卓10miui12，安卓11或者miui12可能有问题
@@ -102,6 +108,7 @@ killall com.miui.notification
 ## 已知bug
 
 - 联系人的详细页面没法打开
+- 不能双开
  
 
 [![Build Status](https://travis-ci.org/linusyang92/mipay-extract.svg)](https://travis-ci.org/linusyang92/mipay-extract)
