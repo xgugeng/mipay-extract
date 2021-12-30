@@ -32,11 +32,11 @@ description=xiaomieufix-$model-$ver
 EOF
 
 ####
-    ./cleaner-fix.sh --clock
-    cp -R ./miui-$model-$ver/deodex/system ./eufix-base/
+    # ./cleaner-fix.sh --clock
+    # cp -R ./miui-$model-$ver/deodex/system ./eufix-base/
     ./extract.sh
     cp -R ./miui-$model-$ver/deodex/system ./eufix-base/
-    cp -R ./PersonalAssistant ./eufix-base/system/priv-app/
+    # cp -R ./PersonalAssistant ./eufix-base/system/priv-app/
     cd eufix-base/
     zip -r ../eufix-$ver-$model-magisk.zip ./*
     cd ..
